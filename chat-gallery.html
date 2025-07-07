@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>صور الشات</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cairo', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .btn-purple {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      border: none;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+    
+    .btn-purple:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+      color: white;
+    }
+    
+    .text-purple {
+      color: #764ba2;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .animate-text {
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes glow {
+      from { 
+        text-shadow: 0 0 20px #667eea, 2px 2px 4px rgba(0,0,0,0.1); 
+      }
+      to { 
+        text-shadow: 0 0 30px #764ba2, 2px 2px 4px rgba(0,0,0,0.1); 
+      }
+    }
+    
+    .container {
+      max-width: 1200px;
+      padding: 0 15px;
+    }
+    
+    .header-section {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px 20px;
+      border-radius: 25px;
+      margin-bottom: 30px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    #chat-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    
+    .chat-image-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      width: 100%;
+      overflow: hidden;
+    }
+    
+    .chat-image-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+    
+    .image-container {
+      width: 100%;
+      height: 280px;
+      overflow: hidden;
+      border-radius: 15px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f8f9fa;
+    }
+    
+    .chat-image-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+      background: white;
+    }
+    
+    .chat-image-card:hover img {
+      transform: scale(1.02);
+    }
+    
+    .chat-image-caption-input {
+      width: 100%;
+      border: 2px solid #e9ecef;
+      border-radius: 15px;
+      padding: 12px;
+      font-family: 'Cairo', Arial, sans-serif;
+      font-size: 14px;
+      resize: vertical;
+      min-height: 50px;
+      max-height: 200px;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.9);
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+    
+    .chat-image-caption-input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+      background: rgba(255, 255, 255, 1);
+    }
+    
+    .final-message {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 30px 25px;
+      border-radius: 25px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 40px 0;
+      animation: pulse 3s infinite;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+      line-height: 1.6;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+    
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #667eea;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Mobile Responsive - الأولوية للموبايل */
+    @media (max-width: 768px) {
+      body {
+        font-size: 14px;
+      }
+      
+      .container {
+        padding: 0 10px;
+      }
+      
+      .header-section {
+        padding: 20px 15px;
+        margin-bottom: 20px;
+      }
+      
+      .header-section h1 {
+        font-size: 24px !important;
+      }
+      
+      .header-section p {
+        font-size: 16px !important;
+      }
+      
+      #chat-gallery {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin-bottom: 30px;
+      }
+      
+      .chat-image-card {
+        padding: 12px;
+        border-radius: 15px;
+      }
+      
+      .image-container {
+        height: 250px;
+        margin-bottom: 12px;
+      }
+      
+      .chat-image-caption-input {
+        padding: 10px;
+        font-size: 13px;
+        min-height: 45px;
+        border-radius: 12px;
+      }
+      
+      .final-message {
+        font-size: 16px;
+        padding: 25px 20px;
+        margin: 30px 0;
+        border-radius: 20px;
+      }
+      
+      .btn-purple {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 8px;
+      }
+      
+      .header-section {
+        padding: 15px 12px;
+        border-radius: 20px;
+      }
+      
+      .header-section h1 {
+        font-size: 20px !important;
+      }
+      
+      .header-section p {
+        font-size: 14px !important;
+      }
+      
+      #chat-gallery {
+        gap: 12px;
+      }
+      
+      .chat-image-card {
+        padding: 10px;
+        border-radius: 12px;
+      }
+      
+      .image-container {
+        height: 220px;
+        border-radius: 12px;
+      }
+      
+      .chat-image-caption-input {
+        padding: 8px;
+        font-size: 12px;
+        min-height: 40px;
+        border-radius: 10px;
+      }
+      
+      .final-message {
+        font-size: 14px;
+        padding: 20px 15px;
+        margin: 25px 0;
+        border-radius: 15px;
+        line-height: 1.5;
+      }
+      
+      .btn-purple {
+        padding: 8px 15px;
+        font-size: 13px;
+        border-radius: 20px;
+      }
+    }
+    
+    /* Tablet */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      #chat-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      
+      .image-container {
+        height: 260px;
+      }
+    }
+    
+    /* Desktop */
+    @media (min-width: 1025px) {
+      #chat-gallery {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+      }
+      
+      .image-container {
+        height: 300px;
+      }
+    }
+    
+    /* Large Desktop */
+    @media (min-width: 1400px) {
+      #chat-gallery {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      
+      .container {
+        max-width: 1400px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- الموسيقى تشتغل خفية -->
+  <audio id="backgroundMusic" autoplay loop muted>
+    <source src="assets/WhatsApp Audio 2025-07-07 at 18.27.22_5f5aab1d.mp3" type="audio/mpeg">
+  </audio>
+
+  <main class="container mt-4 pt-3">
+    <div class="header-section text-center">
+      <a href="yasso.html" class="btn btn-purple mb-3">⬅ العودة</a>
+      <h1 class="display-6 fw-bold text-purple animate-text">❤️❤️❤️ Memories ❤️❤️❤️</h1>
+      <p class="text-white mt-3 fs-5">كل صورة حكاية... كل كلمة ذكرى جميلة</p>
+    </div>
+    
+    <div id="chat-gallery">
+      <div class="text-center" style="grid-column: 1 / -1;">
+        <div class="loading"></div>
+        <p class="text-white mt-3">جاري تحميل الذكريات...</p>
+      </div>
+    </div>
+    
+    <div class="final-message">
+      <div style="font-size: 22px; margin-bottom: 15px;">💕✨💕</div>
+      كل صورة هنا حكاية... كل كلمة ذكرى... وكل لحظة معاكي كانت أحلى من اللي قبلها 💖<br><br>
+      بجد سكيب للموقع العبيط دا بس فعلا مكانش في دماغي افكار انا مره واحده قولت هعمل كذا ازاي امتي ولا خطط ولا عملت اي بتنجان ف عادي بقا بوعدك في حاجه عظمه بمعني كلمه عظمه مستنياكي❤️❤️❤️🫂❤️<br><br>
+      <span style="font-size: 16px; opacity: 0.9;">
+        وكل ما أشوف الصور دي... أفتكر إن الحب الحقيقي مش مجرد كلام... ده أفعال وذكريات حلوة زي دي 🌹
+      </span>
+      <div style="font-size: 22px; margin-top: 15px;">💕✨💕</div>
+    </div>
+  </main>
+
+  <script>
+    // List of chat images with captions
+    const chatImages = [
+      { src: "assets/images/chat/IMG-20250304-WA0000.jpg", caption: "فعلا انا طلعت توكسيك" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-00-24-211_com.whatsapp.png", caption: "هرمونات عادي" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-00-37-124_com.whatsapp.png", caption: "" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-00-58-964_com.whatsapp.png", caption: "تقريبا انا كل ما ابعت تتخض" },
+      { src: "assets/images/person/IMG-20250707-WA0015.jpg", caption: "لما التثبيت" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-01-12-933_com.whatsapp.png", caption: "" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-02-57-333_com.whatsapp.png", caption: "هنا احدهم بيزنقني في نص الشات عشان اعترف عصب عني" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-03-07-911_com.whatsapp.png", caption: "مضطر بقا اقول اللي في قلبي" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-03-19-091_com.whatsapp.png", caption: "بتواسيني عشان كان شكلي حشاش" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-04-07-073_com.whatsapp.png", caption: "تم تغغير المود" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-04-20-984_com.whatsapp.png", caption: "لحظه ما بعد الاعتراف صعبه اوي يجدعان" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-04-33-452_com.whatsapp.png", caption: "" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-04-52-491_com.whatsapp.png", caption: "حقيقي هنا لو كنتي قدامي كنت حضنتك" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-05-13-785_com.whatsapp.png", caption: "طب اي😂😂😂" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-05-24-137_com.whatsapp.png", caption: "" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-13-52-910-edit_com.whatsapp.jpg", caption: "بحاول اكتب اي حاجه يمكن تغير مودك ولو 1%" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-05-33-082_com.whatsapp.png", caption: "تقول متخزوقه" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-06-07-604_com.whatsapp.png", caption: "هنا لو كنتي قدامي كنت اديتك كف علي الكلام الخرا دا" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-06-45-731_com.whatsapp.png", caption: "غطيها يقلبي" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-10-59-178_com.whatsapp.png", caption: "ولاد الناس مش لعبه تتسلي بيهم" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-11-21-937_com.whatsapp.png", caption: "ولسا حافظو عشان يوم اللي قولت فيه مش اللي حبيتك فيه" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-11-42-714_com.whatsapp.png", caption: "يلا بينا" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-24-11-601_com.whatsapp.png", caption: "مش اكتر مني بجد" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-24-28-752_com.whatsapp.png", caption: "يادي بيلي اللي جابتني الارض دي" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-28-01-069_com.whatsapp.png", caption: "خدت بالي يروحي" },
+      { src: "assets/images/chat/IMG-20250221-WA0214.jpg", caption: "" },
+      { src: "assets/images/chat/IMG-20250308-WA0156.jpg", caption: "" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-00-03-991_com.whatsapp.png", caption: "شخص ما " },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-14-08-110_com.whatsapp.png", caption: "دمج فعلا" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-14-45-375_com.whatsapp.png", caption: "اققل خناقه مين اللي بعت الاول" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-21-42-811_com.whatsapp.png", caption: "بدايات وكدا" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-23-18-964_com.whatsapp.png", caption: "اقولك عشان تقولي وانا كمان زي اخويا " },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-23-59-984_com.whatsapp.png", caption: "مش زيك يروحي" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-28-25-553_com.whatsapp.png", caption: "اكتر حاجه حقيقيه فينا" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-28-35-306_com.whatsapp.png", caption: "ربنا يسترك" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-28-53-537_com.whatsapp.png", caption: "عيب بقا اققل حاجه" },
+      { src: "assets/images/chat/Screenshot_2025-07-07-17-29-19-266_com.whatsapp.png", caption: "" }
+    ];
+
+    // Create gallery function
+    function createGallery() {
+      const gallery = document.getElementById('chat-gallery');
+      gallery.innerHTML = ''; // Clear loading
+      
+      chatImages.forEach((item, i) => {
+        const card = document.createElement('div');
+        card.className = 'chat-image-card';
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        
+        // Create image container for better display
+        const imageContainer = document.createElement('div');
+        imageContainer.className = 'image-container';
+        
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = `صورة شات ${i+1}`;
+        img.loading = 'lazy';
+        
+        // Handle image load error
+        img.onerror = function() {
+          this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDMwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xNTAgMTAwQzE2MS4wNDYgMTAwIDE3MCA5MC4wNDU3IDE3MCA3OUM4MCA2Ny45NTQzIDE2MS4wNDYgNTggMTUwIDU4QzEzOC45NTQgNTggMTMwIDY3Ljk1NDMgMTMwIDc5QzEzMCA5MC4wNDU3IDEzOC45NTQgMTAwIDE1MCAxMDBaIiBmaWxsPSIjOUI5QjlCIi8+CjxwYXRoIGQ9Ik0xOTAgMTYwSDExMEMxMDQuNDc3IDE2MCA5OS45OTk5IDE2NC40NzcgOTkuOTk5OSAxNzBWMTkwQzk5Ljk5OTkgMTk1LjUyMyAxMDQuNDc3IDIwMCAxMTAgMjAwSDE5MEMxOTUuNTIzIDIwMCAyMDAgMTk1LjUyMyAyMDAgMTkwVjE3MEMyMDAgMTY0LjQ3NyAxOTUuNTIzIDE2MCAxOTAgMTYwWiIgZmlsbD0iIzlCOUI5QiIvPgo8L3N2Zz4K';
+          this.alt = 'صورة غير متاحة';
+        };
+        
+        imageContainer.appendChild(img);
+        card.appendChild(imageContainer);
+        
+        const captionInput = document.createElement('textarea');
+        captionInput.className = 'chat-image-caption-input';
+        captionInput.placeholder = 'اكتب تعليق...';
+        captionInput.value = item.caption;
+        captionInput.rows = 2;
+        
+        // Auto-resize textarea function
+        function autoResize() {
+          captionInput.style.height = 'auto';
+          captionInput.style.height = captionInput.scrollHeight + 'px';
+        }
+        
+        captionInput.addEventListener('input', autoResize);
+        captionInput.addEventListener('paste', () => setTimeout(autoResize, 0));
+        
+        card.appendChild(captionInput);
+        gallery.appendChild(card);
+        
+        // Animate card appearance
+        setTimeout(() => {
+          card.style.transition = 'all 0.5s ease';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, i * 50);
+        
+        // Initial resize after a short delay
+        setTimeout(() => {
+          autoResize();
+        }, 200);
+      });
+    }
+
+    // Music functionality - تشغيل خفي
+    const music = document.getElementById('backgroundMusic');
+    
+    function initializeMusic() {
+      music.volume = 0.3;
+      music.muted = false;
+      
+      // محاولة تشغيل الموسيقى
+      music.play().catch(e => {
+        console.log('Music autoplay prevented, will play on user interaction');
+        
+        // تشغيل عند أول تفاعل
+        const playOnInteraction = () => {
+          music.play().catch(e => console.log('Could not play music'));
+          document.removeEventListener('click', playOnInteraction);
+          document.removeEventListener('touchstart', playOnInteraction);
+          document.removeEventListener('keydown', playOnInteraction);
+        };
+        
+        document.addEventListener('click', playOnInteraction);
+        document.addEventListener('touchstart', playOnInteraction);
+        document.addEventListener('keydown', playOnInteraction);
+      });
+    }
+
+    // Initialize everything
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        createGallery();
+        initializeMusic();
+      }, 500);
+    });
+    
+    // Handle page visibility change to continue music
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && music.paused) {
+        music.play().catch(e => console.log('Could not resume music'));
+      }
+    });
+  </script>
+</body>
+</html>

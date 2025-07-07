@@ -1,0 +1,336 @@
+/* ======= Custom Purple Theme ======= */
+.text-purple, .bg-purple, .btn-purple {
+  color: #a855f7 !important;
+}
+.bg-purple {
+  background-color: #a855f7 !important;
+  color: #fff !important;
+}
+.btn-purple {
+  background-color: #a855f7 !important;
+  border: none;
+  color: #fff !important;
+}
+.btn-purple:hover {
+  background-color: #9333ea !important;
+}
+
+/* ======= Navbar Adjustments ======= */
+.navbar {
+  border-bottom: 2px solid #a855f7;
+}
+
+/* ======= Floating Hearts Animation ======= */
+#hearts-container {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 2000;
+}
+.heart {
+  position: absolute;
+  bottom: -40px;
+  /* left is set dynamically */
+  width: 32px; height: 32px;
+  background: url('../assets/images/heart.svg') no-repeat center/contain;
+  opacity: 0.8;
+  animation: floatHeart 4s linear forwards;
+  filter: drop-shadow(0 2px 6px #a855f7cc);
+  z-index: 2100;
+}
+@keyframes floatHeart {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+}
+
+/* ======= Game Section ======= */
+#game-section {
+  background: #f3e8ff;
+  border-radius: 1rem;
+  padding: 2rem 1rem;
+  box-shadow: 0 2px 12px rgba(168,85,247,0.08);
+}
+#game-container {
+  width: 100%;
+  max-width: 400px;
+  height: 200px;
+  margin: 0 auto;
+  background: url('../assets/images/game-bg.jpg') center/cover no-repeat;
+  border: 2px solid #a855f7;
+  border-radius: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ======= Photo Gallery ======= */
+.photo-card {
+  border: 2px solid #a855f7;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(168,85,247,0.08);
+  transition: transform 0.2s;
+}
+.photo-card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 4px 16px rgba(168,85,247,0.16);
+}
+
+/* ======= Responsive Adjustments ======= */
+@media (max-width: 576px) {
+  #game-section { padding: 1rem 0.5rem; }
+  #game-container { height: 140px; }
+  #photo-gallery > .col-6,
+  #photo-gallery > .col-md-4,
+  #photo-gallery > .col-lg-3 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+/* ======= Balloons Animation ======= */
+#balloons-container {
+  position: fixed;
+  left: 0; bottom: 0; width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 2000;
+}
+.balloon {
+  position: absolute;
+  width: 40px; height: 60px;
+  background: radial-gradient(circle at 60% 40%, #f472b6 60%, #a855f7 100%);
+  border-radius: 50% 50% 45% 45%/60% 60% 40% 40%;
+  box-shadow: 0 4px 16px #a855f744;
+  animation: floatBalloon 8s linear infinite;
+}
+@keyframes floatBalloon {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-100vh) scale(1.1); opacity: 0; }
+}
+
+/* ======= Flowers Animation ======= */
+#flowers-container {
+  position: fixed;
+  right: 0; bottom: 0; width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 2000;
+}
+.flower {
+  position: absolute;
+  width: 36px; height: 36px;
+  background: url('../assets/images/flower.svg') no-repeat center/contain;
+  opacity: 0.85;
+  animation: floatFlower 7s linear infinite;
+  filter: drop-shadow(0 2px 6px #a855f7cc);
+}
+@keyframes floatFlower {
+  0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-100vh) scale(1.2) rotate(360deg); opacity: 0; }
+}
+
+/* ======= Animated Text ======= */
+.animate-text {
+  animation: textPop 1.2s cubic-bezier(.68,-0.55,.27,1.55) both;
+}
+@keyframes textPop {
+  0% { opacity: 0; transform: scale(0.7) translateY(40px); }
+  80% { opacity: 1; transform: scale(1.1) translateY(-10px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+.animate-bounce-in {
+  animation: bounceIn 1.5s;
+}
+@keyframes bounceIn {
+  0% { opacity: 0; transform: scale(0.3); }
+  50% { opacity: 1; transform: scale(1.05); }
+  70% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+/* ======= Game Over Message ======= */
+#game-over-msg {
+  box-shadow: 0 4px 24px #a855f744;
+  font-family: inherit;
+}
+
+/* ======= Butterflies Animation ======= */
+#butterflies-container {
+  position: fixed;
+  left: 0; top: 0; width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 2000;
+}
+.butterfly {
+  position: absolute;
+  width: 36px; height: 36px;
+  background: url('../assets/images/butterfly.svg') no-repeat center/contain;
+  opacity: 0.9;
+  animation: floatButterfly 6s linear infinite;
+  filter: drop-shadow(0 2px 6px #a855f7cc);
+}
+@keyframes floatButterfly {
+  0% { transform: translateY(0) scale(1) rotate(-10deg); opacity: 1; }
+  30% { transform: translateY(-30vh) scale(1.1) rotate(10deg); }
+  60% { transform: translateY(-60vh) scale(1) rotate(-10deg); }
+  100% { transform: translateY(-100vh) scale(1.1) rotate(10deg); opacity: 0; }
+}
+
+body, .navbar, .card, .lead, h1, h2, h3, h4, h5, h6, p, button {
+  font-family: 'Cairo', Arial, sans-serif !important;
+}
+
+.heart-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 999;
+}
+.heart {
+  position: absolute;
+  bottom: 0;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  transform: rotate(45deg);
+  animation: floatUp 4s linear forwards;
+}
+.heart::before,
+.heart::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  border-radius: 50%;
+}
+.heart::before {
+  top: -10px;
+  left: 0;
+}
+.heart::after {
+  left: -10px;
+  top: 0;
+}
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(45deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+.person-card {
+  border: 2px solid #a855f7;
+  border-radius: 1.5rem;
+  box-shadow: 0 2px 12px rgba(168,85,247,0.08);
+  overflow: hidden;
+  background: #fff;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.person-card img,
+.person-card video {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 1.5rem 1.5rem 0 0;
+  background: #f3e8ff;
+}
+@media (max-width: 576px) {
+  .person-card img,
+  .person-card video {
+    height: 220px;
+  }
+}
+.btn-purple.animate-bounce-in {
+  animation: pulse 1.5s infinite alternate, bounceIn 1.5s;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 #a855f7aa; }
+  100% { box-shadow: 0 0 24px 8px #a855f744; }
+}
+/* Chat Gallery Styles */
+.chat-image-card {
+  border: 2px solid #a855f7;
+  border-radius: 1.5rem;
+  box-shadow: 0 2px 12px rgba(168,85,247,0.08);
+  background: #fff;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.chat-image-card img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}
+.chat-comment-box {
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #a855f7;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  resize: vertical;
+  background: #f3e8ff;
+  color: #333;
+}
+.chat-image-caption {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #7c3aed; /* purple shade to match theme */
+  text-align: center;
+  background: #f8f9fa;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+.love-animate {
+  position: relative;
+  animation: lovePulse 2.5s infinite alternate;
+  box-shadow: 0 0 24px 4px #ffb6d5, 0 0 0 0 #fff0f6;
+  border-radius: 1.5rem;
+  z-index: 1;
+}
+.love-animate::after {
+  content: '💗';
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 2.2rem;
+  opacity: 0.85;
+  pointer-events: none;
+  filter: drop-shadow(0 0 6px #fff0f6);
+}
+@keyframes lovePulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 24px 4px #ffb6d5, 0 0 0 0 #fff0f6;
+  }
+  60% {
+    transform: scale(1.04) rotate(-2deg);
+    box-shadow: 0 0 36px 8px #ffb6d5, 0 0 12px 2px #fff0f6;
+  }
+  100% {
+    transform: scale(1.08) rotate(2deg);
+    box-shadow: 0 0 48px 12px #ffb6d5, 0 0 24px 4px #fff0f6;
+  }
+}
+body.bg-light {
+  background: none !important;
+} 
